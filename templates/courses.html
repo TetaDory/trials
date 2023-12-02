@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courses - Your Web Application</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/courses.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+<nav>
+<ul class="nav-list">
+  <li><a href="{{ url_for('dashboard') }}" title="Dashboard"><i class="fas fa-home"></i>Dashboard</a></li>
+  <li><a href="{{ url_for('courses') }}" title="Courses"><i class="fas fa-book"></i>Courses</a></li>
+  <li><a href="{{ url_for('mentorship')}}" title="Mentorship Program"><i class="fas fa-handshake-angle"></i>Mentorship</a></li>
+  <li><a href="{{ url_for('hackathon')}}" title="Hackathon Competitions"><i class="fas fa-code"></i>Hackathon</a></li>
+  <li><a href="{{ url_for('progress') }}" title="Progress"><i class="fas fa-chart-line"></i>Progress</a></li>
+  <li><a href="{{ url_for('profile') }}" title="Profile"><i class="fas fa-user"></i>Profile</a></li>
+  <li><a href="{{ url_for('index') }}" onclick="logout()" title="Logout"><i class="fas fa-sign-out-alt"></i></a></li>
+</ul>
+</nav>
+
+<main>
+<section id="course-categories" class="category-grid">
+  <!-- Web Development -->
+  <div class="category">
+    <h3>Learn HTML</h3>
+    <div class="course-card">
+      <img src="../static/images/HTML1.jpeg" alt="Course Image"> <br>
+      <div class="content"> 
+        <h4>HTML Fundamentals</h4>
+        <p>Learn the basics of HTML and use it to create the outline of a sample page.</p>
+        <ul>
+          <li>Course Duration: 4 weeks</li>
+          <li>Prerequisites: None</li>
+        </ul>
+      </div>
+      <button class="btn"><a href="{{ url_for('enroll', course_id=1) }}" class="btn">Enroll Now</a></button>
+    </div>
+  </div>
+
+  <div class="category">
+    <h3>CSS</h3>
+    <div class="course-card">
+      <img src="../static/images/CSS1.jpg" alt="Course Image">
+      <div class="content"> 
+        <h4>CSS (Cascading Style Sheets)</h4>
+        <p>Master the fundamentals of styling a webpage making it look appealing.</p>
+        <ul>
+          <li>Course Duration: 5 weeks</li>
+          <li>Prerequisites: Basic knowledge of HTML</li>
+        </ul>
+      </div>
+      <button class="btn"><a href="{{ url_for('enroll', course_id=2) }}" class="btn">Enroll Now</a></button>
+    </div>
+  </div>
+  
+  <div class="category">
+    <h3>JavaScript (JS)</h3>
+    <div class="course-card">
+      <img src="../static/images/js.png" alt="Course Image">
+      <div class="content"> 
+        <h4>JavaScript Fundamentals</h4>
+        <p>Master the fundamentals of JavaScript to add interactivity to your web pages.</p>
+        <ul>
+          <li>Course Duration: 6 weeks</li>
+          <li>Prerequisites: Basic knowledge of HTML/CSS</li>
+        </ul>
+      </div>
+      <button class="btn"><a href="{{ url_for('enroll', course_id=2) }}" class="btn">Enroll Now</a></button>
+    </div>
+  </div>
+
+  <div class="category">
+    <h3>Python</h3>
+    <div class="course-card">
+      <img src="../static/images/Python1.png" alt="Course Image"> <br>
+      <div class="content">
+        <h4>Python Fundamentals</h4>
+        <p>Learn the essentials of the Python Programming language.</p>
+        <ul>
+          <li>Course Duration: 10 weeks</li>
+          <li>Prerequisites: None</li>
+        </ul>
+      </div>
+      <button class="btn"><a href="{{ url_for('enroll', course_id=3) }}" class="btn">Enroll Now</a></button>
+    </div>
+  </div>
+
+
+</section>
+</main>
+
+<footer>
+<p>&copy; 2023 DigiGirls Technnovation</p>
+</footer>
+</body>
+
+</html>
