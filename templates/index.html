@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Wave Technnovation</title>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <!-- Link to Font Awesome CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.0-web/css/all.min.css') }}">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <div class="background-container">
+        <header>
+            <h1>StartWave</h1>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('post') }}">Post</a></li>
+                    <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </header>
+        <main>
+            {% if current_user.is_authenticated %}
+            <div class="container">
+                <h2>Welcome, {{ current_user.email }}!</h2>
+                <p>Thank you for being part of StartWave. You can now find ypur business partner, post your Business Idea or Find a idea to invest in. </p>
+                <p>Thank you for being part of Start Wave Technnovation. You can now explore share your innovative solutions.</p>
+			</div>
+            {% else %}
+        <div class="container">
+        <h2>Begin your journey to become an entrepreneur</h2>
+        <div class="pcontainer">
+            <p>Start Wave Technnovation is a groundbreaking and transformative platform that removes the middle man and connects straight to potential business partners </p>
+        </div>
+            <a href="{{ url_for('register') }}" class="btn pulse">Register</a>
+            <a href="{{ url_for('login') }}" class="btn pulse">Login</a>
+        </div>
+
+        <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
+        </main>
+        <footer>
+            <p>&copy; 2023 Start Wave Technnovation</p>
+        </footer>
+            </div>
+        {% endif %}
+
+</body>
+<script>
+    let logoutTimer;
+  
+    function startLogoutTimer() {
+      logoutTimer = setTimeout(logout, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+    }
+  
+    function resetLogoutTimer() {
+      clearTimeout(logoutTimer);
+      startLogoutTimer();
+    }
+  
+    function logout() {
+      // Implement your logout logic here, e.g., redirect to the logout route
+      window.location.href = '/logout';
+    }
+
+    function handlePageClose() {
+      resetLogoutTimer();
+      logout(); // Perform logout when the page is closed
+    }
+  
+    // Attach event listeners to reset the timer on user activity
+    document.addEventListener('mousemove', resetLogoutTimer);
+    document.addEventListener('keypress', resetLogoutTimer);
+  
+    // Start the initial timer when the page loads
+    startLogoutTimer();
+    // Handle the beforeunload event to logout when the page is closed
+    window.addEventListener('beforeunload', function (event) {
+        // You may want to add a confirmation message here
+        logout();
+    })
+  </script>
+</html>

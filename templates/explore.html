@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Wave Technnovation</title>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/explore.css') }}">
+    <!-- Link to Font Awesome CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.0-web/css/all.min.css') }}">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <header>
+    <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('explore') }}">Explore</a></li>
+        <li><a href="{{ url_for('post') }}">Post</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+    </header>
+    <div class="container mt-5">
+        <h1 class="mb-4">Explore Business Ideas</h1>
+        {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.user.username }}</h5>
+                    <p class="card-text">{{ post.business_idea }}</p>
+                    {% if post.images %}
+                        <img src="{{ url_for('static', filename=post.images) }}" class="card-img-top" alt="Business Image">
+                    {% endif %}
+                    {% if post.videos %}
+                        <video controls class="card-img-top">
+                            <source src="{{ url_for('static', filename=post.videos) }}" type="video/mp4">
+                        </video>
+                    {% endif %}
+                    <p class="card-text"><small class="text-muted">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <footer>
+        <p>&copy; 2023 Start Wave Technnovation</p>
+    </footer>
+    <!-- Add your scripts or include jQuery or other frameworks -->
+</body>
+</html>
