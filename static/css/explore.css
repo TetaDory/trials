@@ -14,7 +14,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: url('../images/DigiG1.jpg');
     background-size: cover;
 }
 
