@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
+from sqlalchemy.dialects import postgresql
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
