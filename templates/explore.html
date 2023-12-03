@@ -26,14 +26,15 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ post.user.username }}</h5>
                     <p class="card-text">{{ post.business_idea }}</p>
-                    {% if post.images %}
-                        <img src="{{ url_for('static', filename=post.images) }}" class="card-img-top" alt="Business Image">
-                    {% endif %}
+                    <p class="card-text">{{ post.contact_information }}</p>
+                    <!--{% if post.images %}-->
+                    <!--<img src="{{ url_for('static', filename=post.images) }}" class="card-img-top" alt="Business Image">-->
+                    <!--{% endif %}
                     {% if post.videos %}
                         <video controls class="card-img-top">
                             <source src="{{ url_for('static', filename=post.videos) }}" type="video/mp4">
                         </video>
-                    {% endif %}
+                    {% endif %}-->
                     <p class="card-text"><small class="text-muted">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
                 </div>
             </div>
@@ -42,6 +43,5 @@
     <footer>
         <p>&copy; 2023 Start Wave Technnovation</p>
     </footer>
-    <!-- Add your scripts or include jQuery or other frameworks -->
 </body>
 </html>

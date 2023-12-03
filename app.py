@@ -8,18 +8,17 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
-
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 app.config['SESSION_PERMANENT'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['UPLOAD_FOLDER'] = 'uploads'
 
 db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
 migrate = Migrate(app, db)
+
 # Define the User class
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,8 +34,7 @@ class PostForm(FlaskForm):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     business_idea = db.Column(db.String(200), nullable=False)
-    images = db.Column(db.String(100), nullable=True)
-    videos = db.Column(db.String(100), nullable=True)
+    contact_information = db.Column(db.String(100), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('posts', lazy=True))
@@ -107,14 +105,12 @@ def post():
     if request.method == 'POST' and form.validate_on_submit():
         # Extract data from the form
         business_idea = form.business_idea.data
-        images = form.images.data
-        videos = form.videos.data
+        contact_information = form.contact_information.data
 
         # Create a new post instance
         new_post = Post(
             business_idea=business_idea,
-            images=images,
-            videos=videos,
+            contact_information=contact_information,
             user_id=current_user.id
         )
 
@@ -123,8 +119,6 @@ def post():
 
         # Commit the changes to the database
         db.session.commit()
-
-        flash('Your business idea has been posted successfully!', 'success')
 
         # Redirect to the explore page after posting
         return redirect(url_for('explore'))
@@ -135,9 +129,10 @@ def post():
 def explore():
     # Retrieve all business ideas from the database
     all_business_ideas = Post.query.all()
+    all_contact_information = Post.query.all()
 
     # Pass the list of business ideas to the template
-    return render_template('explore.html', posts=all_business_ideas)
+    return render_template('explore.html', posts=all_business_ideas, contact_information=all_contact_information)
 
 
 @app.route('/logout')
