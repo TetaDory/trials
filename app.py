@@ -16,7 +16,10 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 app.config['SESSION_PERMANENT'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://default:y5AmTrIcR4zW@ep-royal-lake-92857756.us-east-1.postgres.vercel-storage.com:5432/verceldb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('POSTGRES_URL', 'sqlite:///site.db')
+
+
+#postgres://default:y5AmTrIcR4zW@ep-royal-lake-92857756.us-east-1.postgres.vercel-storage.com:5432/verceldb
 
 db = SQLAlchemy(app)
 
