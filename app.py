@@ -21,7 +21,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://default:y5AmT
 
 #postgres://default:y5AmTrIcR4zW@ep-royal-lake-92857756.us-east-1.postgres.vercel-storage.com:5432/verceldb
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, uri='postgres://default:y5AmTrIcR4zW@ep-royal-lake-92857756-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb'')
 
 login_manager = LoginManager(app)
 migrate = Migrate(app, db)
