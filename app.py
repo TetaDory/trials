@@ -16,7 +16,7 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 app.config['SESSION_PERMANENT'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://default:y5AmTrIcR4zW@ep-royal-lake-92857756-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sitedb'
 
 
 #postgres://default:y5AmTrIcR4zW@ep-royal-lake-92857756.us-east-1.postgres.vercel-storage.com:5432/verceldb
@@ -151,4 +151,4 @@ def logout():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(host='0.0.0.0', port=8888)
+    app.run(debug=True)
